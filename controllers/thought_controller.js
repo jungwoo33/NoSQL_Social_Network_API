@@ -7,6 +7,7 @@ const thought_controller = {
          .then((thoughts) => res.json(thoughts))
          .catch((err) => res.status(500).json(err));
    },
+
    // Get a single thought by id
    get_thought_by_id(req,res) {
       Thought.findOne({_id: req.params.thoughtId})
@@ -23,6 +24,7 @@ const thought_controller = {
          .then((thought) => res.json(thought))
          .catch((err) => res.status(500).json(err));
    },
+   /*
    // Update a thought by id
    update_thought_by_id(req,res) {
       Thought.findOneAndUpdate({_id: req.params.thoughtId})
@@ -42,4 +44,7 @@ const thought_controller = {
          .then(() => res.json({message: 'Thought and associated apps deleted!'}))
          .catch((err) => res.status(500).json(err));
    },
+   */
 };
+
+module.exports = thought_controller;
