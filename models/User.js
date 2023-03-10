@@ -27,9 +27,9 @@ userSchema.virtual('friendCount').get(function(){
 //const User = mongoose.model('User', userSchema);
 const User = model('User', userSchema);
 
+/*
 const handleError = (err) => console.error(err);
 
-/*
 // Will add data only if collection is empty to prevent duplicates
 // More than one document can have the same name value
 User.find({}).exec((err, collection) => {
