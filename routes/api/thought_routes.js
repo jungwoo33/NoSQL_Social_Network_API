@@ -19,6 +19,6 @@ router.route('/:id')
 router.route('/:thoughtId/reactions')
    .post(add_reaction);
 router.route('/:thoughtId/:reactionId')
-   .delete(delete_friend);
+   .delete(delete_reaction);
 
 module.exports = router;
