@@ -9,6 +9,8 @@ const {
    delete_reaction
 } = require('../../controllers/thought_controller');
 
+// we are in /api/thoughts/
+
 router.route('/')
    .get(get_all_thoughts)
    .post(post_new_thought);

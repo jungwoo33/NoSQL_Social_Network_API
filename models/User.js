@@ -3,10 +3,12 @@ const {Schema, model} = require('mongoose');
 // Schema to create User model
 const userSchema = new Schema(
    {
-      userename: {type: String, unique: true, required: true, trim: true},
+      username: {type: String, unique: true, required: true, trim: true},
       email: {type: String, unique: true, required: true, match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/]},
       thought: [{type: Schema.Types.ObjectID, ref: "Thought"}], // Array of _id values referencing the "Thought" model:
       friends: [{type: Schema.Types.ObjectID, ref: "User"}], // Array of _id values referencing the "User" model (self-reference)
+
+      // here, "reactionCount" will be virtually included ...
    },
 
    // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
@@ -27,26 +29,30 @@ userSchema.virtual('friendCount').get(function(){
 //const User = mongoose.model('User', userSchema);
 const User = model('User', userSchema);
 
-/*
+
+// Let's initialize with some information...
 const handleError = (err) => console.error(err);
 
 // Will add data only if collection is empty to prevent duplicates
 // More than one document can have the same name value
 User.find({}).exec((err, collection) => {
+  if(err) {
+    return handleError(err);
+  }
   if (collection.length === 0) {
-    User.insertMany(
+    return User.insertMany(
       [
         { username: 'sam_1', email: 'sam_1@gmail.com' },
-        { username: 'sam_2', email: 'sam_2@gmail.com' },
+        //{ username: 'sam_2', email: 'sam_2@gmail.com' },
       ],
       (insertErr) => {
         if (insertErr) {
           handleError(insertErr);
+        } else {
+          console.log ('Initial user has been inserted');
         }
       }
     );
   }
 });
-*/
-
 module.exports = User;

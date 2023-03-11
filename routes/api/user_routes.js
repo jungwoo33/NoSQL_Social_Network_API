@@ -9,6 +9,8 @@ const {
    delete_friend
 } = require('../../controllers/user_controller');
 
+// we are in /api/users/
+
 router.route('/')
    .get(get_all_users)
    .post(post_new_user);
