@@ -14,12 +14,11 @@ const {
 router.route('/')
    .get(get_all_users)
    .post(post_new_user);
-
-/*
 router.route('/:id')
    .get(get_user_by_id)
    .put(update_user_by_id)
    .delete(delete_user_by_id);
+/*   
 router.route('/:userId/friends/:friendId')
    .post(add_friend)
    .delete(delete_friend);

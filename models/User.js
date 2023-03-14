@@ -44,6 +44,7 @@ User.find({}).exec((err, collection) => {
       [
         { username: 'sam_1', email: 'sam_1@gmail.com' },
         { username: 'sam_2', email: 'sam_2@gmail.com' },
+        { username: 'sam_3', email: 'sam_3@gmail.com' },
       ],
       (insertErr) => {
         if (insertErr) {

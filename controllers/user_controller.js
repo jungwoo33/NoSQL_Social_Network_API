@@ -10,7 +10,7 @@ const user_controller = {
 
    // Get a single user
    get_user_by_id(req,res) {
-      User.findOne({_id: req.params.userId})
+      User.findOne({_id: req.params.id})
          .select('-__v')
          .then((user) => 
             !user
@@ -25,7 +25,6 @@ const user_controller = {
          .catch((err) => res.status(500).json(err));
    },
    
-   /*
    // Update a user by id
    update_user_by_id(req,res) {
       User.findOneAndUpdate({_id: req.params.userId})
@@ -45,7 +44,6 @@ const user_controller = {
          .then(() => res.json({message: 'User and associated apps deleted!'}))
          .catch((err) => res.status(500).json(err));
    },
-   */
 };
 
 module.exports = user_controller;

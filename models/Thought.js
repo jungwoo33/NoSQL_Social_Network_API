@@ -1,6 +1,6 @@
 const { Schema, model, Types } = require('mongoose');
-//const date_format = require('../utils/date_format');
-import dateFormat, {masks} from "dateformat";
+const dateFormat = require('../utils/date_format');
+//import dateFormat, {masks} from "dateformat";
 
 // this "reactionSchema" will be inserted into "thoughtSchema"
 // So, this will be the reaction to the "thought"
@@ -86,7 +86,8 @@ Thought.find({}).exec((err, collection) => {
   if (collection.length === 0) {
     return Thought.insertMany(
       [
-        { thoughtText: 'Thoughts are the words of our minds', username: "sam_1" },
+        { thoughtText: 'Thought by sam_1', username: "sam_1" },
+        { thoughtText: 'Thought by sam_2', username: "sam_2" }
       ],
       (insertErr) => {
         if (insertErr) {
