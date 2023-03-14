@@ -11,6 +11,16 @@ const user_controller = {
    // Get a single user
    get_user_by_id(req,res) {
       User.findOne({_id: req.params.id})
+         // show not just "thought" id but details with "populate" method:
+         .populate({
+            path: "thought",
+            select: "-__v",
+         })
+         // same as "thought", i.e., show details of "freinds" info
+         .populate({
+            path: "friends",
+            select: "-__v",
+         })
          .select('-__v')
          .then((user) => 
             !user
