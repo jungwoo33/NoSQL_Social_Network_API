@@ -10,7 +10,7 @@ const user_controller = {
 
    // Get a single user
    get_user_by_id(req,res) {
-      User.findOne({_id: req.params.id})
+      User.findOne({_id: req.params.userId})
          // show not just "thought" id but details with "populate" method:
          .populate({
             path: "thought",
@@ -37,7 +37,7 @@ const user_controller = {
    
    // Update a user by id
    update_user_by_id(req,res) {
-      User.findOneAndUpdate({_id: req.params.id})
+      User.findOneAndUpdate({_id: req.params.userId})
          .then((user) =>
             !user
                ? res.status(404).json({ message: 'No user found with this ID'})
@@ -46,7 +46,7 @@ const user_controller = {
    },
    // Delete a user and associated apps
    delete_user_by_id(req,res) {
-      User.findOneAndDelete({_id: req.params.id})
+      User.findOneAndDelete({_id: req.params.userId})
          .then((user) => 
             !user
                ? res.status(404).json({message: 'No user with that ID'})

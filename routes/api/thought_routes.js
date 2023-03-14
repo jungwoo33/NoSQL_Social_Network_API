@@ -14,7 +14,7 @@ const {
 router.route('/')
    .get(get_all_thoughts)
    .post(post_new_thought);
-router.route('/:id')
+router.route('/:thoughtId')
    .get(get_thought_by_id)
    .put(update_thought_by_id)
    .delete(delete_thought_by_id);

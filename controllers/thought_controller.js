@@ -10,7 +10,7 @@ const thought_controller = {
 
    // Get a single thought by id
    get_thought_by_id(req,res) {
-      Thought.findOne({_id: req.params.id})
+      Thought.findOne({_id: req.params.thoughtId})
          // show not just "reactions" id but details with "populate" method:
          .populate({
             path: "reactions",
@@ -31,7 +31,7 @@ const thought_controller = {
    },
    // Update a thought by id
    update_thought_by_id(req,res) {
-      Thought.findOneAndUpdate({_id: req.params.id})
+      Thought.findOneAndUpdate({_id: req.params.thoughtId})
          .then((thought) =>
             !thought
                ? res.status(404).json({ message: 'No thought found with this ID'})
@@ -40,7 +40,7 @@ const thought_controller = {
    },
    // Delete a thought and associated apps
    delete_thought_by_id(req,res) {
-      Thought.findOneAndDelete({_id: req.params.id})
+      Thought.findOneAndDelete({_id: req.params.thoughtId})
          .then((thought) => 
             !thought
                ? res.status(404).json({message: 'No thought with that ID'})

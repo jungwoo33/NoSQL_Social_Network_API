@@ -14,7 +14,7 @@ const {
 router.route('/')
    .get(get_all_users)
    .post(post_new_user);
-router.route('/:id')
+router.route('/:userId')
    .get(get_user_by_id)
    .put(update_user_by_id)
    .delete(delete_user_by_id);
