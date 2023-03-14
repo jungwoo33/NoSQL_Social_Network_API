@@ -18,9 +18,7 @@ router.route('/:id')
    .get(get_user_by_id)
    .put(update_user_by_id)
    .delete(delete_user_by_id);
-/*   
 router.route('/:userId/friends/:friendId')
    .post(add_friend)
    .delete(delete_friend);
-*/
 module.exports = router;
