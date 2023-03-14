@@ -43,7 +43,7 @@ User.find({}).exec((err, collection) => {
     return User.insertMany(
       [
         { username: 'sam_1', email: 'sam_1@gmail.com' },
-        //{ username: 'sam_2', email: 'sam_2@gmail.com' },
+        { username: 'sam_2', email: 'sam_2@gmail.com' },
       ],
       (insertErr) => {
         if (insertErr) {
