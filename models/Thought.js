@@ -1,10 +1,14 @@
 const { Schema, model, Types } = require('mongoose');
+//const date_format = require('../utils/date_format');
+import dateFormat, {masks} from "dateformat";
 
+// this "reactionSchema" will be inserted into "thoughtSchema"
+// So, this will be the reaction to the "thought"
 const reactionSchema = new Schema(
    {
-      reactionID: {
-         type: Schema.Types.ObjectID, 
-         default: () => new Types.ObjectID() // Default value is set to a new ObjectID
+      reactionId: {
+         type: Schema.Types.ObjectId, 
+         default: () => new Types.ObjectId() // Default value is set to a new ObjectID
       },
       reactionBody: {
          type: String,
