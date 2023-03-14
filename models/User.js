@@ -4,9 +4,9 @@ const {Schema, model} = require('mongoose');
 const userSchema = new Schema(
    {
       username: {type: String, unique: true, required: true, trim: true},
-      email: {type: String, unique: true, required: true, match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/]},
-      thought: [{type: Schema.Types.ObjectID, ref: "Thought"}], // Array of _id values referencing the "Thought" model:
-      friends: [{type: Schema.Types.ObjectID, ref: "User"}], // Array of _id values referencing the "User" model (self-reference)
+      email: {type: String, unique: true, required: true, match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]}, // regex from previous challenge work //[/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/]},
+      thought: [{type: Schema.Types.ObjectId, ref: "Thought"}], // Array of _id values referencing the "Thought" model:
+      friends: [{type: Schema.Types.ObjectId, ref: "User"}], // Array of _id values referencing the "User" model (self-reference)
 
       // here, "reactionCount" will be virtually included ...
    },

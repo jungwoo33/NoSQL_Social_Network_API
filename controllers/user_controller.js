@@ -3,7 +3,7 @@ const {User, Thought} = require("../models");
 const user_controller = {
    // Get all users
    get_all_users(req,res) {
-      User.find()
+      User.find({})
          .then((users) => res.json(users))
          .catch((err) => res.status(500).json(err));
    },
