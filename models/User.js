@@ -5,7 +5,7 @@ const userSchema = new Schema(
    {
       username: {type: String, unique: true, required: true, trim: true},
       email: {type: String, unique: true, required: true, match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]}, // regex from previous challenge work //[/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/]},
-      thought: [{type: Schema.Types.ObjectId, ref: "Thought"}], // Array of _id values referencing the "Thought" model:
+      thoughts: [{type: Schema.Types.ObjectId, ref: "Thought"}], // Array of _id values referencing the "Thought" model:
       friends: [{type: Schema.Types.ObjectId, ref: "User"}], // Array of _id values referencing the "User" model (self-reference)
 
       // here, "reactionCount" will be virtually included ...
@@ -44,7 +44,7 @@ User.find({}).exec((err, collection) => {
       [
         { username: 'sam_1', email: 'sam_1@gmail.com' },
         { username: 'sam_2', email: 'sam_2@gmail.com' },
-        { username: 'sam_3', email: 'sam_3@gmail.com' },
+        //{ username: 'sam_3', email: 'sam_3@gmail.com' },
       ],
       (insertErr) => {
         if (insertErr) {
