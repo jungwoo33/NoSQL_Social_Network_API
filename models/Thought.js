@@ -23,6 +23,7 @@ const reactionSchema = new Schema(
          type: Date,
          default: Date.now, // Set default value to the current timestamp
          get: (timestamp) => dateFormat(timestamp), // use a getter method to format the timestamp on query
+         //get: (timestamp) => dateFormat(timestamp,"isoDateTime"), // use a getter method to format the timestamp on query
       }
    },
    {

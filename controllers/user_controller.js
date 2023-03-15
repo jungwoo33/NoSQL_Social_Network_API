@@ -11,12 +11,12 @@ const user_controller = {
    // Get a single user
    get_user_by_id(req,res) {
       User.findOne({_id: req.params.userId})
-         // show not just "thought" id but details with "populate" method:
+         // show not just "thoughts" id but details with "populate" method:
          .populate({
-            path: "thought",
+            path: "thoughts",
             select: "-__v",
          })
-         // same as "thought", i.e., show details of "freinds" info
+         // same as "thoughts", i.e., show details of "freinds" info
          .populate({
             path: "friends",
             select: "-__v",
@@ -50,7 +50,7 @@ const user_controller = {
          .then((user) => 
             !user
                ? res.status(404).json({message: 'No user with that ID'})
-               : application.deleteMany({_id: {$in: user.application}}))
+               : Thought.deleteMany({_id: {$in: user.thoughts}}))
          .then(() => res.json({message: 'User and associated apps deleted!'}))
          .catch((err) => res.status(500).json(err));
    },
@@ -58,7 +58,7 @@ const user_controller = {
    // Add friend
    add_friend(req,res) {
       User.findOneAndUpdate(
-         {_id: req.params.id},
+         {_id: req.params.userId},
          {$addToSet: {friends: req.params.friendId}}, // $addToSet adds a value to an array unless the value is already present
          {new: true, runValidators: true})
       .then((user) => 
@@ -69,11 +69,15 @@ const user_controller = {
    },
 
    // Delete friend
+   // Note, this is not actual deleting but updating, i.e., updating "friends"
+   // Here, {new: true} should be included since:
+   //    By default, the returned document does not include the modifications made on the update. 
+   //    To return the document with the modifications made on the update, use the "new" option.
    delete_friend(req,res) {
-      User.findByIdAndDelete(
-         {_id: req.params.id},
+      User.findOneAndUpdate(
+         {_id: req.params.userId},
          {$pull: {friends: req.params.friendId}}, // $pull removes from an existing array all instances of a values that match a specified condition.
-         {new: true})
+         {new: true, runValidators: true})
       .then((user) => 
          !user
             ? res.status(404).json({message: "No user with that ID"})

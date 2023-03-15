@@ -4,7 +4,7 @@ const thought_controller = {
    // Get all thoughts
    get_all_thoughts(req,res) {
       Thought.find()
-         .then((thoughts) => res.json(thoughts))
+         .then((thought) => res.json(thought))
          .catch((err) => res.status(500).json(err));
    },
 
@@ -44,7 +44,7 @@ const thought_controller = {
          .then((thought) => 
             !thought
                ? res.status(404).json({message: 'No thought with that ID'})
-               : application.deleteMany({_id: {$in: thought.application}}))
+               : User.deleteMany({_id: {$in: thought.username}}))
          .then(() => res.json({message: 'Thought and associated apps deleted!'}))
          .catch((err) => res.status(500).json(err));
    },
@@ -52,8 +52,8 @@ const thought_controller = {
    // add reaction:
    add_reaction(req,res) {
       Thought.findOneAndUpdate(
-         {_id: req.params.id},
-         {$addToSet: {reactions: req.params.body}}, // $addToSet adds a value to an array unless the value is already present
+         {_id: req.params.thoughtId},
+         {$addToSet: {reactions: req.body}}, // $addToSet adds a value to an array unless the value is already present
          {new: true, runValidators: true})
       .then((thought) => 
          !thought
@@ -64,10 +64,10 @@ const thought_controller = {
 
    // delete reaction:
    delete_reaction(req,res) {
-      Thought.findByIdAndDelete(
-         {_id: req.params.id},
+      Thought.findOneAndUpdate(
+         {_id: req.params.thoughtId},
          {$pull: {reactions: req.params.reactionId}}, // $pull removes from an existing array all instances of a values that match a specified condition.
-         {new: true})
+         {new: true, runValidators: true})
       .then((thought) => 
          !thought
             ? res.status(404).json({message: "No thoguht with that ID"})
